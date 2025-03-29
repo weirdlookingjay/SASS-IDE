@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "random-uuid",
+		"name": "Online IDE API",
+		"description": "API collection for Online IDE platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login - Get Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"your_username\",\n    \"password\": \"your_password\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/token/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "token", ""]
+						}
+					}
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"your_refresh_token\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/token/refresh/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "token", "refresh", ""]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"newuser\",\n    \"email\": \"newuser@example.com\",\n    \"password\": \"your_password\",\n    \"password2\": \"your_password\",\n    \"first_name\": \"New\",\n    \"last_name\": \"User\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/register/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "users", "register", ""]
+						}
+					}
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/users/me/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "users", "me", ""]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Workspaces",
+			"item": [
+				{
+					"name": "List Git Templates",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/workspaces/templates/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "workspaces", "templates", ""]
+						}
+					}
+				},
+				{
+					"name": "List Resource Classes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/workspaces/resources/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "workspaces", "resources", ""]
+						}
+					}
+				},
+				{
+					"name": "List Workspaces",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/workspaces/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "workspaces", ""]
+						}
+					}
+				},
+				{
+					"name": "Create Workspace",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"My Python Project\",\n    \"git_template_id\": 1,\n    \"resource_class_id\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/workspaces/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "workspaces", ""]
+						}
+					}
+				},
+				{
+					"name": "Get Workspace Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/workspaces/1/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "workspaces", "1", ""]
+						}
+					}
+				},
+				{
+					"name": "Update Workspace",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Project Name\",\n    \"git_template_id\": 1,\n    \"resource_class_id\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/workspaces/1/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "workspaces", "1", ""]
+						}
+					}
+				},
+				{
+					"name": "Delete Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/workspaces/1/",
+							"host": ["localhost"],
+							"port": "8000",
+							"path": ["api", "workspaces", "1", ""]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "jwt_token",
+			"value": "your_jwt_token_here"
+		}
+	]
+}
