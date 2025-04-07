@@ -17,6 +17,40 @@ A cloud-based IDE platform that allows developers to code in their browser, simi
 - TailwindCSS
 - Shadcn UI Components
 
+## Authentication Flow
+
+### JWT Authentication
+
+The application uses JWT (JSON Web Tokens) for secure authentication. Here's how it works:
+
+1. **Login Process**:
+   - User submits username/password to `/api/jwt/login/`
+   - Server validates credentials and returns:
+     - `access_token`: Short-lived JWT for API requests
+     - `refresh_token`: Long-lived token for getting new access tokens
+
+2. **Protected Routes**:
+   - Frontend adds `Authorization: Bearer <access_token>` header
+   - Backend validates token using `DebugJWTAuthentication`
+   - Invalid/expired tokens return 401 Unauthorized
+
+3. **Token Refresh**:
+   - When access token expires, frontend uses refresh token
+   - Call to `/api/jwt/token/refresh/` gets new access token
+   - Failed refresh redirects to login
+
+4. **User Data**:
+   - Current user data: `GET /api/jwt/me/`
+   - User details: `GET /api/jwt/users/<username>/`
+   - Both require valid access token
+
+### Security Features
+
+- CORS enabled with proper origin checks
+- Tokens stored in localStorage (consider secure cookie in production)
+- Automatic token refresh handling
+- Protected routes redirect to login if unauthorized
+
 ## Core Features
 
 ### 1. Workspace Management
